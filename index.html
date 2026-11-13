@@ -1,1 +1,41 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Agente de viaje</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app">
 
+    <!-- Encabezado -->
+    <header class="encabezado">
+      <h1>Agente de viaje</h1>
+      <p>Destinos, precios y más</p>
+    </header>
+
+    <!-- zona de chat: acá se muestran las burbujas del usuario y del agente -->
+    <section id="zona-de-chat" class="zona-de-chat" aria-label="Zona de chat">
+      <div id="mensajes" class="mensajes" role="log" aria-live="polite"></div>
+      <p id="estado" class="estado" role="status" hidden></p>
+    </section>
+
+    <!-- zona de escritura: campo de texto y botón de envío -->
+    <form id="zona-de-escritura" class="zona-de-escritura" aria-label="Zona de escritura" autocomplete="off">
+      <label for="campo-mensaje" class="solo-lectores">Tu mensaje</label>
+      <textarea id="campo-mensaje" rows="2" maxlength="500" placeholder="Preguntame por destinos, precios y más…"></textarea>
+      <div class="barra-envio">
+        <span id="contador" class="contador">0 / 500</span>
+        <button type="submit" id="boton-enviar">Enviar</button>
+      </div>
+    </form>
+
+  </main>
+
+  <!-- config.js SIEMPRE antes que script.js -->
+  <script src="config.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
