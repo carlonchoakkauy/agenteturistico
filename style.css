@@ -1,1 +1,179 @@
+/* style.css - Estilo oscuro y moderno, responsive */
 
+:root {
+  --fondo: #0b1020;
+  --superficie: #131a2e;
+  --superficie-2: #1d2742;
+  --borde: #26304d;
+  --texto: #e8ecf6;
+  --texto-suave: #9aa6c4;
+  --acento: #2f66e0;
+  --error-fondo: #3a1d28;
+  --error-borde: #7a2e45;
+  --error-texto: #ffd5de;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color: var(--texto);
+  background: radial-gradient(circle at top, #16204a 0%, var(--fondo) 55%);
+}
+
+[hidden] { display: none !important; }
+
+/* Contenedor principal: ocupa toda la altura de la pantalla */
+.app {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  height: 100vh;
+  height: 100dvh;
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+/* Encabezado */
+.encabezado {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 4px 16px;
+  padding: 0 4px;
+}
+.encabezado h1 { margin: 0; font-size: 22px; }
+.encabezado p { margin: 0; font-size: 14px; color: var(--texto-suave); }
+
+/* zona de chat */
+.zona-de-chat {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--superficie);
+  border: 1px solid var(--borde);
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+.mensajes {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 18px;
+}
+
+/* Burbujas */
+.burbuja {
+  max-width: 80%;
+  padding: 12px 14px;
+  line-height: 1.5;
+  font-size: 15px;
+  white-space: pre-wrap;       /* respeta los saltos de línea */
+  overflow-wrap: anywhere;
+}
+.burbuja-agente {
+  align-self: flex-start;
+  background: var(--superficie-2);
+  border-radius: 16px 16px 16px 4px;
+}
+.burbuja-usuario {
+  align-self: flex-end;
+  background: var(--acento);
+  color: #ffffff;
+  border-radius: 16px 16px 4px 16px;
+}
+.burbuja-error {
+  align-self: flex-start;
+  background: var(--error-fondo);
+  border: 1px solid var(--error-borde);
+  color: var(--error-texto);
+  border-radius: 16px 16px 16px 4px;
+}
+
+/* Indicador "escribiendo" */
+.estado {
+  margin: 0;
+  padding: 0 18px 14px;
+  font-size: 14px;
+  color: var(--texto-suave);
+  animation: pulso 1.2s ease-in-out infinite;
+}
+@keyframes pulso { 50% { opacity: 0.4; } }
+
+/* zona de escritura */
+.zona-de-escritura {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  background: var(--superficie);
+  border: 1px solid var(--borde);
+  border-radius: 18px;
+}
+
+textarea {
+  width: 100%;
+  min-height: 56px;
+  max-height: 160px;
+  padding: 12px;
+  font-family: inherit;
+  font-size: 16px;            /* evita el zoom automático en celulares */
+  color: var(--texto);
+  background: #0e1527;
+  border: 1px solid var(--borde);
+  border-radius: 12px;
+  resize: none;
+}
+textarea::placeholder { color: var(--texto-suave); }
+textarea:focus { outline: 2px solid var(--acento); outline-offset: 1px; }
+
+.barra-envio {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.contador { font-size: 13px; color: var(--texto-suave); }
+
+button {
+  min-height: 44px;
+  padding: 0 24px;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  color: #ffffff;
+  background: var(--acento);
+  border: 0;
+  border-radius: 12px;
+  cursor: pointer;
+}
+button:hover:not(:disabled) { filter: brightness(1.1); }
+button:focus-visible { outline: 2px solid #ffffff; outline-offset: 2px; }
+button:disabled, textarea:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* Solo para lectores de pantalla */
+.solo-lectores {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+/* Celulares */
+@media (max-width: 600px) {
+  .app { padding: 10px; gap: 10px; }
+  .burbuja { max-width: 90%; }
+  .mensajes { padding: 14px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .estado { animation: none; }
+}
